@@ -5,7 +5,3 @@
         $('#itemEdit').focus();
     }) 
 });
-
-//$('#confirm-delete').on('show.bs.modal', function (e) {
-//    $(this).find('.btn-ok').attr('id', $(e.relatedTarget).data('href'));
-//});

@@ -76,7 +76,14 @@
                         @Html.DisplayFor(modelItem => item.CreatedDate)
                     </td>
                     <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.DueDate)
+                        @if (DateTime.ParseExact(item.DueDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture) < DateTime.Now)
+                        {
+                            <div class="overdue">@Html.DisplayFor(modelItem => item.DueDate)</div>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.DueDate)
+                        }
                     </td>
                     <td class="text-center">
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id })

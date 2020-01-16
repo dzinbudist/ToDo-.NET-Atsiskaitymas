@@ -6,68 +6,6 @@
     ViewBag.Title = "ToDo List Application";
 }
 
-
-@*------------------tabs*@
-
-@*<ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="active nav-link" id="filters-tab" data-toggle="tab" href="#filtersTab" role="tab" aria-controls="categoryTab" aria-selected="true">
-                Filters
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="false">Add New</a>
-        </li>
-    </ul>
-
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="filtersTab" role="tabpanel" aria-labelledby="filters-tab">
-            <form id="book-filter">
-                <div class="form-group">
-                    <label class="labelTop" for="categorySelect">Kategorija</label>
-                    <select name="cars" id="categorySelect" class="form-control">
-                        <option value="all">Visos</option>
-                        <option value="Detektyvai">Detektyvai</option>
-                        <option value="Mokslinė fantastika">Mokslinė fantastika</option>
-                        <option value="Fantasy">Fantasy</option>
-                        <option value="Trileriai">Trileriai</option>
-                    </select>
-                </div>
-            </form>
-            <div class="form-group">
-                <label for="search">Paieška</label>
-                <div class="input-group">
-                    <input class="form-control my-0 py-1" id="search" type="text" placeholder="Pavadinimas, Autorius, ISBN, Metai.." aria-label="Search">
-                    <div class="input-group-append">
-                        <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="new" role="tabpanel" aria-labelledby="new-tab">
-            <form id="book-form">
-                <div class="form-group">
-                    <label class="labelTop" for="category">Kategorija</label>
-                    <select name="category" id="category" class="form-control">
-                        <option value="Detektyvai">Detektyvai</option>
-                        <option value="Mokslinė fantastika">Mokslinė fantastika</option>
-                        <option value="Fantasy">Fantasy</option>
-                        <option value="Trileriai">Trileriai</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="title">Pavadinimas</label>
-                    <input type="text" id="title" class="form-control">
-                </div>
-            </form>
-            <button type="button" id="btnAddBook" value="Pridėti Knygą" class="btn btn-info btn-block" onClick="UI.addBook()">Pridėti Knygą</button>
-        </div>
-    </div>*@
-
-@*------------------tabs*@
-
 <div style="height: 50px;"></div>
 
 <button id="showModal" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#createModal">
