@@ -1,0 +1,126 @@
+﻿@using ToDoApp.Models
+
+@model ToDo
+
+@{
+    ViewBag.Title = "ToDo List Application";
+}
+
+
+@*------------------tabs*@
+
+@*<ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="active nav-link" id="filters-tab" data-toggle="tab" href="#filtersTab" role="tab" aria-controls="categoryTab" aria-selected="true">
+                Filters
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="false">Add New</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="filtersTab" role="tabpanel" aria-labelledby="filters-tab">
+            <form id="book-filter">
+                <div class="form-group">
+                    <label class="labelTop" for="categorySelect">Kategorija</label>
+                    <select name="cars" id="categorySelect" class="form-control">
+                        <option value="all">Visos</option>
+                        <option value="Detektyvai">Detektyvai</option>
+                        <option value="Mokslinė fantastika">Mokslinė fantastika</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Trileriai">Trileriai</option>
+                    </select>
+                </div>
+            </form>
+            <div class="form-group">
+                <label for="search">Paieška</label>
+                <div class="input-group">
+                    <input class="form-control my-0 py-1" id="search" type="text" placeholder="Pavadinimas, Autorius, ISBN, Metai.." aria-label="Search">
+                    <div class="input-group-append">
+                        <span class="input-group-text red lighten-3" id="basic-text1"><i class="fas fa-search text-grey" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="new" role="tabpanel" aria-labelledby="new-tab">
+            <form id="book-form">
+                <div class="form-group">
+                    <label class="labelTop" for="category">Kategorija</label>
+                    <select name="category" id="category" class="form-control">
+                        <option value="Detektyvai">Detektyvai</option>
+                        <option value="Mokslinė fantastika">Mokslinė fantastika</option>
+                        <option value="Fantasy">Fantasy</option>
+                        <option value="Trileriai">Trileriai</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Pavadinimas</label>
+                    <input type="text" id="title" class="form-control">
+                </div>
+            </form>
+            <button type="button" id="btnAddBook" value="Pridėti Knygą" class="btn btn-info btn-block" onClick="UI.addBook()">Pridėti Knygą</button>
+        </div>
+    </div>*@
+
+@*------------------tabs*@
+
+<div style="height: 50px;"></div>
+
+<button id="showModal" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#createModal">
+    Add New
+</button>
+
+<div id="tableDiv"></div>
+
+<div id="todoCreateForm">
+    @using (Ajax.BeginForm("AJAXCreate", "ToDoes", new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = "tableDiv"
+    }))
+    {
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Add New</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group myForm">
+                            @Html.AntiForgeryToken()
+                            <div>
+                                <label for="itemEdit">Item</label>
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", id = "itemEdit", @required = "required" } })
+                                <label id="modalLabel" for="priorityDropdown">Priority</label>
+                                @Html.DropDownListFor(model => model.Priority, new SelectList(Enum.GetValues(typeof(Priority))), new { @class = "form-control", id = "priorityDropdown" })
+                                <label id="modalLabel" for="itemDate">Due Date</label>
+                                @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control", id = "itemDate", type = "date" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-secondary" id="btnCreate">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Custom_Scripts/BuildTable.js"></script>
+    <script src="~/Custom_Scripts/ButtonCreateListener.js"></script>
+    <script src="~/Custom_Scripts/ClearModal.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

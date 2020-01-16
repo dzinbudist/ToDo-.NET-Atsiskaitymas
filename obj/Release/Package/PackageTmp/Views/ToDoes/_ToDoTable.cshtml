@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ToDoApp.Models.ToDo>
+
+<div style="height: 15px;"></div>
+
+<div id="progressBarToDo">
+    <p>@(ViewBag.Completed) (@(ViewBag.Percent)%)</p>
+    <div class="progress">
+        <div class="progress-bar bg-secondary" role="progressbar" style="width:@(Html.AttributeEncode(ViewBag.Percent))%"></div>
+    </div>
+</div>
+<div style="height: 25px;"></div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="text-center" style="width: 10%">
+                    Completed
+                </th>
+                <th style="width: 50%">
+                    Item
+                </th>
+                <th class="text-center" style="width: 10%">
+                    Priority
+                </th>
+                <th class="text-center" style="width: 10%">
+                    Created
+                </th>
+                <th class="text-center" style="width: 10%">
+                    Due Date
+                </th>
+                <th class="text-center" style="width: 5%">
+                    Edit
+                </th>
+                <th class="text-center" style="width: 5%">
+                    Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.CheckBoxFor(modelItem => item.IsDone, new { id = item.Id, @class = "ActiveCheck" })
+                    </td>
+                    <td>
+                        @if (!item.IsDone)
+                        {
+                            @Html.DisplayFor(modelItem => item.Description)
+                        }
+                        else
+                        {
+                            <div class="CompetedToDo">@Html.DisplayFor(modelItem => item.Description)</div>
+                        }
+                    </td>
+                    <td class="text-center">
+                        @if (item.IsDone)
+                        {
+                            <span class="CompetedToDo">@Html.DisplayFor(modelItem => item.Priority)</span>
+                        }
+                        else if (item.Priority == "Low")
+                        {
+                            <span class="badge badge-success">@Html.DisplayFor(modelItem => item.Priority)</span>
+                        }
+                        else if (item.Priority == "Medium")
+                        {
+                            <span class="badge badge-primary">@Html.DisplayFor(modelItem => item.Priority)</span>
+                        }
+                        else if (item.Priority == "High")
+                        {
+                            <span class="badge badge-danger">@Html.DisplayFor(modelItem => item.Priority)</span>
+                        }
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.DueDate)
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    </td>
+                    <td class="text-center">
+                        @* @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+                        @* <a href="#" class="btn btn-danger btn-sm delete" onclick="location.href='@Url.Action(item.Id.ToString(), "ToDoes/Delete")'">X</a>*@
+                        <a href="#" id="@item.Id" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger btn-sm delete delButton">X</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/Custom_Scripts/AddCheckBoxListener.js"></script>
+<script src="~/Custom_Scripts/BtnDeleteListener.js"></script>

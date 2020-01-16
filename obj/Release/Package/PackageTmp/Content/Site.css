@@ -1,0 +1,63 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 280px;*/
+}
+
+
+/*ToDo Table*/
+.CompetedToDo{
+    text-decoration: line-through;
+}
+
+.modal-content {
+    width: 100%;
+}
+
+#modalLabel {
+    margin-top: 10px;
+}
+
+#completedLabel {
+    margin-left: 10px;
+}
+
+.badge {
+    width: 100%;
+    padding: 1em;
+}
+
+.modal-dialog-centered {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: calc(100% - (.5rem * 2));
+}
+
+@media (min-width: 576px) {
+    .modal-dialog-centered {
+        min-height: calc(100% - (1.75rem * 2));
+    }
+}
